@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emojiis</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: linear-gradient(135deg, #9aaeff, #fad0c4);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+        }
+        input {
+            font-size: 18px;
+            padding: 12px;
+            width: calc(100% - 24px);
+            border: 2px solid #7e75ff;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #5e5eff;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px;
+            margin-top: 10px;
+            background: #7575ff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #5e8cff;
+        }
+        p {
+            font-size: 24px;
+            margin-top: 20px;
+            word-wrap: break-word;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            input, button {
+                font-size: 16px;
+                padding: 10px;
+            }
+            p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Emoji-Translatör</h1>
+        <input type="text" id="textInput" placeholder="Gib deinen Text ein...">
+        <button onclick="convertToAnimals()">Übersetzen</button>
+        <p id="output"></p>
+    </div>
+    
+    <script>
+        const animalMap = {
+            'a': '🐜', 'b': '🐻', 'c': '🐱', 'd': '🐬', 'e': '🦄', 'f': '🦊', 'g': '🦍',
+            'h': '🐹', 'i': '🦔', 'j': '🐆', 'k': '🦘', 'l': '🦁', 'm': '🐭', 'n': '🦏',
+            'o': '🐙', 'p': '🐼', 'q': '🦜', 'r': '🐀', 's': '🐍', 't': '🐅', 'u': '🦉',
+            'v': '🦌', 'w': '🐋', 'x': '🦓', 'y': '🦬', 'z': '🦎'
+        };
+
+        function convertToAnimals() {
+            const input = document.getElementById("textInput").value.toLowerCase();
+            let result = "";
+            for (let char of input) {
+                result += animalMap[char] || char;
+            }
+            document.getElementById("output").textContent = result;
+        }
+    </script>
+</body>
+</html>
