@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>emojiis</title>
+    <title>Emoji-Translatör</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -75,8 +75,8 @@
 <body>
     <div class="container">
         <h1>Emoji-Translatör</h1>
-        <input type="text" id="textInput" placeholder="Gib deinen Text ein...">
-        <button onclick="convertToAnimals()">Übersetzen</button>
+        <input type="text" id="textInput" placeholder="Gib Text oder Emojis ein...">
+        <button onclick="convertTextOrEmoji()">Übersetzen</button>
         <p id="output"></p>
     </div>
     
@@ -88,12 +88,24 @@
             'v': '🦌', 'w': '🐋', 'x': '🦓', 'y': '🦬', 'z': '🦎'
         };
 
-        function convertToAnimals() {
-            const input = document.getElementById("textInput").value.toLowerCase();
+        const reverseAnimalMap = Object.fromEntries(
+            Object.entries(animalMap).map(([key, value]) => [value, key])
+        );
+
+        function convertTextOrEmoji() {
+            const input = document.getElementById("textInput").value;
             let result = "";
+            
             for (let char of input) {
-                result += animalMap[char] || char;
+                if (animalMap[char]) {
+                    result += animalMap[char];
+                } else if (reverseAnimalMap[char]) {
+                    result += reverseAnimalMap[char];
+                } else {
+                    result += char;
+                }
             }
+            
             document.getElementById("output").textContent = result;
         }
     </script>
